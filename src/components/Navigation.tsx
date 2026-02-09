@@ -113,7 +113,7 @@ const Navigation: React.FC<NavigationProps> = ({ mobileOpen, handleDrawerToggle 
             Staff Management System
           </Typography>
           <Typography variant="caption" sx={{ color: '#2196f3', fontWeight: 600 }}>
-            Version 1.0.0
+            Assist360
           </Typography>
         </Box>
       </Box>

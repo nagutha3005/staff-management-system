@@ -72,7 +72,9 @@ const Dashboard: React.FC = () => {
       <Typography variant="h4" sx={{ mb: 4, fontWeight: 700, color: '#2196f3' }}>
         Dashboard
       </Typography>
-
+<Typography variant="body1" sx={{ color: '#64b5f6', textAlign: 'center', py: 3 }}>
+              Welcome to the Assist360 Staff Management System! Navigate to Employee Management to view and manage employees.
+            </Typography>
       <Grid container spacing={3}>
         {stats.map((stat, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
@@ -185,19 +187,6 @@ const Dashboard: React.FC = () => {
                 {(users.reduce((sum, user) => sum + user.age, 0) / users.length).toFixed(1)} years
               </Typography>
             </Box>
-          </Paper>
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={3} sx={{ mt: 2 }}>
-        <Grid item xs={12}>
-          <Paper sx={{ p: 3, backgroundColor: '#121212', border: '1px solid #1976d2' }}>
-            <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, color: '#2196f3' }}>
-              Recent Activity
-            </Typography>
-            <Typography variant="body1" sx={{ color: '#64b5f6', textAlign: 'center', py: 3 }}>
-              Welcome to the Staff Management System! Navigate to Employee Management to view and manage employees.
-            </Typography>
           </Paper>
         </Grid>
       </Grid>

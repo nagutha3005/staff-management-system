@@ -41,7 +41,7 @@ import { addUser, updateUser, deleteUser } from '../store/usersSlice';
 import { User } from '../types/user.types';
 import EmployeeForm from '../components/EmployeeForm';
 import EmployeeDetails from '../components/EmployeeDetails';
-
+import NotificationSnackbar from '../components/NotificationSnackbar';
 const EmployeeManagement: React.FC = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.users);
@@ -54,6 +54,16 @@ const EmployeeManagement: React.FC = () => {
   const [formMode, setFormMode] = useState<'add' | 'edit'>('add');
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState<User | null>(null);
+  // Snackbar state
+const [snackbar, setSnackbar] = useState<{
+  open: boolean;
+  message: string;
+  severity: 'success' | 'error' | 'warning' | 'info';
+}>({
+  open: false,
+  message: '',
+  severity: 'success',
+});
   
   // Context Menu and Details Dialog States
   const [contextMenu, setContextMenu] = useState<{
@@ -72,7 +82,17 @@ const EmployeeManagement: React.FC = () => {
       user.company.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.company.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+const showNotification = (message: string, severity: 'success' | 'error' | 'warning' | 'info') => {
+  setSnackbar({
+    open: true,
+    message,
+    severity,
+  });
+};
 
+const handleCloseSnackbar = () => {
+  setSnackbar((prev) => ({ ...prev, open: false }));
+};
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -99,13 +119,18 @@ const EmployeeManagement: React.FC = () => {
     setDeleteDialogOpen(true);
   };
 
-  const handleDeleteConfirm = () => {
-    if (employeeToDelete) {
-      dispatch(deleteUser(employeeToDelete.id));
-      setDeleteDialogOpen(false);
-      setEmployeeToDelete(null);
-    }
-  };
+ const handleDeleteConfirm = () => {
+  if (employeeToDelete) {
+    const employeeName = `${employeeToDelete.firstName} ${employeeToDelete.lastName}`;
+    dispatch(deleteUser(employeeToDelete.id));
+    showNotification(
+      `Employee ${employeeName} deleted successfully!`,
+      'success'
+    );
+    setDeleteDialogOpen(false);
+    setEmployeeToDelete(null);
+  }
+};
 
   const handleDeleteCancel = () => {
     setDeleteDialogOpen(false);
@@ -115,8 +140,16 @@ const EmployeeManagement: React.FC = () => {
   const handleFormSubmit = (employee: User) => {
     if (formMode === 'add') {
       dispatch(addUser(employee));
+       showNotification(
+      `Employee ${employee.firstName} ${employee.lastName} added successfully!`,
+      'success'
+    );
     } else {
       dispatch(updateUser(employee));
+      showNotification(
+      `Employee ${employee.firstName} ${employee.lastName} updated successfully!`,
+      'success'
+    );
     }
   };
 
@@ -438,6 +471,13 @@ const EmployeeManagement: React.FC = () => {
         open={detailsDialogOpen}
         onClose={() => setDetailsDialogOpen(false)}
         employee={employeeToView}
+      />
+      {/* Success/Error Notifications */}
+      <NotificationSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
       />
     </Box>
   );

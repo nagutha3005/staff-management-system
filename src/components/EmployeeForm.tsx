@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -80,6 +80,39 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
           state: '',
         },
   });
+  useEffect(() => {
+  if (employee && mode === 'edit') {
+    reset({
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      email: employee.email,
+      phone: employee.phone,
+      age: employee.age,
+      gender: employee.gender,
+      department: employee.company.department,
+      title: employee.company.title,
+      role: employee.role,
+      username: employee.username,
+      city: employee.address.city,
+      state: employee.address.state,
+    });
+  } else if (mode === 'add') {
+    reset({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      age: 18,
+      gender: 'male',
+      department: 'Engineering',
+      title: '',
+      role: 'user',
+      username: '',
+      city: '',
+      state: '',
+    });
+  }
+}, [employee, mode, reset]);
 
   const handleFormSubmit = (data: FormData) => {
     const newEmployee: User = {
