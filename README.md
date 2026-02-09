@@ -88,7 +88,7 @@ staff-management/
 
 2. **Install dependencies**
    ```bash
-   npm install
+   npm install if not works npm install --force (Please use --force flag due to peer dependency conflicts)
    ```
    or
    ```bash
