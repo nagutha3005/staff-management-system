@@ -15,7 +15,6 @@ import { Dashboard, People, Work } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 260;
-
 interface NavigationProps {
   mobileOpen: boolean;
   handleDrawerToggle: () => void;

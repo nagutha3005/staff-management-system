@@ -21,7 +21,6 @@ interface EmployeeFormProps {
   employee?: User;
   mode: 'add' | 'edit';
 }
-
 interface FormData {
   firstName: string;
   lastName: string;

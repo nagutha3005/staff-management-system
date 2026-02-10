@@ -37,7 +37,7 @@ This is a complete Staff Management Web Application built according to the techn
 ### Step 1: Install Dependencies
 ```bash
 cd staff-management
-npm install
+npm install --force
 ```
 
 ### Step 2: Start Development Server
@@ -76,7 +76,7 @@ All fields are validated with appropriate rules:
 - Minimum length requirements
 - Real-time error messages
 
-## 🎯 Key Technical Implementations
+## Key Technical Implementations
 
 ### 1. Redux Toolkit Setup
 - **Store Configuration**: Centralized state management
@@ -107,7 +107,7 @@ All fields are validated with appropriate rules:
 - **Responsive Grid**: Mobile-first responsive design
 - **Icons**: Material icons for better UX
 
-## 📊 Data Flow
+## Data Flow
 
 ```
 Users.json 
@@ -124,28 +124,7 @@ Redux Actions (State Updates)
     ↓
 Re-render Components
 ```
-
-## 🔧 File Structure Highlights
-
-```
-src/
-├── assets/Users.json          # Original data source
-├── components/
-│   ├── EmployeeForm.tsx       # Reusable form component
-│   └── Navigation.tsx         # Sidebar navigation
-├── pages/
-│   ├── Dashboard.tsx          # Statistics and overview
-│   └── EmployeeManagement.tsx # CRUD operations
-├── store/
-│   ├── store.ts              # Redux store config
-│   ├── usersSlice.ts         # User state slice
-│   ├── usersApi.ts           # RTK Query API
-│   └── hooks.ts              # Typed Redux hooks
-├── types/user.types.ts        # TypeScript interfaces
-└── utils/theme.ts             # MUI theme configuration
-```
-
-## 🎨 Design Decisions
+## Design Decisions
 
 ### Why Material-UI?
 - Professional, production-ready components
@@ -168,7 +147,7 @@ src/
 - Minimal re-renders
 - TypeScript support
 
-## 🧪 Testing Suggestions
+## Testing Suggestions
 
 1. **Add a new employee** with all required fields
 2. **Edit an existing employee** and verify changes persist
@@ -179,7 +158,7 @@ src/
 7. **Responsive design** - resize browser window
 8. **Navigation** - switch between Dashboard and Employee Management
 
-## 📈 Possible Enhancements (Not Required but Possible)
+## Possible Enhancements (Not Required but Possible)
 
 - Export employee data to CSV/Excel
 - Advanced filtering options
@@ -202,7 +181,7 @@ This application demonstrates:
 - ✅ Responsive design implementation
 - ✅ Code organization and structure
 
-## 📞 Support
+## Support
 
 For any questions or clarifications about the implementation, please refer to the detailed README.md file included in the project.
 
