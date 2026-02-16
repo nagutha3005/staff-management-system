@@ -10,9 +10,14 @@ import {
   Box,
   Typography,
   Divider,
+  Button,
+  Avatar,
 } from '@mui/material';
-import { Dashboard, People, Work } from '@mui/icons-material';
+import { Dashboard, People, Work, Logout } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../store/authSlice';
+import { RootState } from '../store/store';
 
 const drawerWidth = 260;
 interface NavigationProps {
@@ -23,6 +28,13 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ mobileOpen, handleDrawerToggle }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
 
   const menuItems = [
     {
@@ -106,14 +118,64 @@ const Navigation: React.FC<NavigationProps> = ({ mobileOpen, handleDrawerToggle 
             backgroundColor: '#0d0d0d',
             borderRadius: 1,
             border: '1px solid #1976d2',
+            mb: 2,
           }}
         >
-          <Typography variant="caption" sx={{ color: '#64b5f6', display: 'block', mb: 0.5 }}>
-            Staff Management System
-          </Typography>
-          <Typography variant="caption" sx={{ color: '#2196f3', fontWeight: 600 }}>
-            Assist360
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
+            <Avatar
+              sx={{
+                width: 40,
+                height: 40,
+                backgroundColor: '#2196f3',
+                fontSize: '1rem',
+                fontWeight: 700,
+              }}
+            >
+              {user?.firstName?.[0]}{user?.lastName?.[0]}
+            </Avatar>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: '#2196f3',
+                  fontWeight: 600,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {user?.firstName} {user?.lastName}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: '#64b5f6',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  display: 'block',
+                }}
+              >
+                @{user?.username}
+              </Typography>
+            </Box>
+          </Box>
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={<Logout />}
+            onClick={handleLogout}
+            sx={{
+              color: '#ff5252',
+              borderColor: '#ff5252',
+              '&:hover': {
+                borderColor: '#ff1744',
+                backgroundColor: '#ff525220',
+              },
+            }}
+          >
+            Logout
+          </Button>
         </Box>
       </Box>
     </Box>
